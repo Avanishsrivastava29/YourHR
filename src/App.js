@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {Box, Button} from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AddEventButton from './component/AddEventbuttons';
+import Dashboard from './component/Dashboard';
+import Header from './component/Headers';
+import Login from './component/Login';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  const handleSignup = (newUser) => {
+    setUser(newUser);
+  };
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  // function to toggle login form visibility
+  const toggleLoginForm = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+   <Header/> <Box style={{marginTop:70}}>
+  <AddEventButton/>  <Button color="inherit" onClick={toggleLoginForm}  class="login">
+            Login
+          </Button>
+        {/* render login form if showLoginForm is true */}
+      {showLoginForm && <Login />}</Box>
+
+   
+    
+    
+    
     </div>
   );
-}
+};
 
 export default App;
